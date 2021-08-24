@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+<!-- /////////////////////////////////NAV BAR ///////////////////////////////////      -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-info navbar-dark">
+  <ul class="navbar-nav">
+  	<li class="nav-item active">
+      <a class="nav-link" th:href="@{/index}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/books}">Buy another Book</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/videos}">Buy another Video</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/musics}">Buy another Music</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/carts}">Back to Cart</a>
+    </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+		 <a class="nav-link">[[${#authentication.getPrincipal().getUserFullName()}]]</a>
+	</li>
+	  <li class="nav-item active">
+      <a class="nav-link" th:href="@{/login}">Log Out</a>
+    </li>   
+  </ul>
+</nav>
+
+
+	<!-- 			=============================================BOOK STARTS======================================== -->
+
+	<table class="table table-hover">
+		<thead class="thead-dark">
+		
+			<tr style="background-color: lightgray">
+				<th scope="col">Book id</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th scope="col">Page Number</th>
+				<th scope="col">Publish Date</th>
+				<th scope="col">Publishing House</th>
+				<th scope="col">Author/s</th>
+				<th scope="col">Price</th>
+				<th scope="col">QTY</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="bookitem : ${newCartBookLink}">
+
+				<th scope="row">[[${bookitem.book.id}]]</th>
+				<td>[[${bookitem.book.title}]]</td>
+				<td>[[${bookitem.book.description}]]</td>
+				<td>[[${bookitem.book.pageNumbers}]]</td>
+				<td>[[${bookitem.book.publishDate}]]</td>
+				<td>[[${bookitem.book.publishingHouse}]]</td>
+				<td>[[${bookitem.book.authorNames}]]</td>
+				<td>[[${bookitem.book.price}]]</td>
+				<td>
+					<form  method="post" th:action="@{/cart/updateQuantity}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> 
+						<input type="text" name="bookId"
+							th:value="${bookitem.book.id}" hidden="true" /> 
+						<input
+							type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" /> 
+						<input type="number" size="2" name="quantity"
+							th:value="${bookitem.quantity}" th:id="${quantity}"
+							autocomplete="off" style="max-width: 60px; text-align: center;"
+							MIN="1" MAX="30" class="form-control" />
+						<button class="btn btn-success btn-sm" type="submit" name="submit"
+							value="Update">Refresh</button>
+					</form>
+				</td>
+				<td>
+					<form id="deleteBookBtn" method="post" th:action="@{/cart/deleteBookFromCart}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> 
+						<input type="text" name="bookId"
+							th:value="${bookitem.book.id}" hidden="true" /> 
+						<input
+							type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" />
+					</form>
+					<button class="btn btn-danger btn-sm" type="submit" name="submit"
+							value="Delete" form="deleteBookBtn">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- 			==========================================================VIDEO STARTS======================================== -->
+
+	<table class="table table-hover">
+		<thead class="thead-dark">
+			<tr style="background-color: lightgray">
+				<th scope="col">Video ID</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th scope="col">Director</th>
+				<th scope="col">Publish Date</th>
+				<th scope="col">Duration</th>
+				<th scope="col">DVD Number</th>
+				<th scope="col">Actor/s</th>
+				<th scope="col">Price</th>
+				<th scope="col">QTY</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="videoitem : ${newCartVideoLink}">
+
+				<th scope="row">[[${videoitem.video.id}]]</th>
+				<td>[[${videoitem.video.title}]]</td>
+				<td>[[${videoitem.video.description}]]</td>
+				<td>[[${videoitem.video.director}]]</td>
+				<td>[[${videoitem.video.publishDate}]]</td>
+				<td>[[${videoitem.video.duration}]]</td>
+				<td>[[${videoitem.video.dvdNumber}]]</td>
+				<td>[[${videoitem.video.actorNames}]]</td>
+				<td>[[${videoitem.video.price}]]</td>
+				<td>
+					<form id="quantityFormVideo" method="post" th:action="@{/cart/updateVideoQuantity}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> 
+						<input type="text" name="videoId" th:value="${videoitem.video.id}" hidden="true" /> 
+						<input type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" /> 
+						<input type="number" size="2" name="quantity"
+							th:value="${videoitem.quantity}" th:id="${quantity}"
+							autocomplete="off" style="max-width: 60px; text-align: center;"
+							MIN="1" MAX="30" class="form-control" />
+						<button class="btn btn-success btn-sm" type="submit" name="submit"
+							value="Update" >Refresh</button>
+					</form>
+				</td>
+				<td>
+					<form id="deleteVideoBtn" method="post" th:action="@{/cart/deleteVideoFromCart}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> <input type="text" name="videoId"
+							th:value="${videoitem.video.id}" hidden="true" /> 
+						<input type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" />
+					</form>
+					<button class="btn btn-danger btn-sm" type="submit" name="submit"
+							value="Delete" form="deleteVideoBtn">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- 			==========================================================MUSIC STARTS======================================== -->
+
+	<table class="table table-hover">
+		<thead class="thead-dark">
+			<tr style="background-color: lightgray">
+				<th scope="col">Music ID</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th scope="col">Publishing House</th>
+				<th scope="col">Publish Date</th>
+				<th scope="col">Duration</th>
+				<th scope="col">CD Number</th>
+				<th scope="col">Author/s</th>
+				<th scope="col">Price</th>
+				<th scope="col">QTY</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="musicitem : ${newCartMusicLink}">
+
+				<th scope="row">[[${musicitem.music.id}]]</th>
+				<td>[[${musicitem.music.title}]]</td>
+				<td>[[${musicitem.music.description}]]</td>
+				<td>[[${musicitem.music.publishingHouse}]]</td>
+				<td>[[${musicitem.music.publishDate}]]</td>
+				<td>[[${musicitem.music.duration}]]</td>
+				<td>[[${musicitem.music.cdNumber}]]</td>
+				<td>[[${musicitem.music.authorNames}]]</td>
+				<td>[[${musicitem.music.price}]]</td>
+				<td>
+					<form id="quantityFormMusic" method="post" th:action="@{/cart/updateMusicQuantity}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> <input type="text" name="musicId"
+							th:value="${musicitem.music.id}" hidden="true" /> 
+						<input type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" /> 
+						<input type="number" size="2" name="quantity"
+							th:value="${musicitem.quantity}" th:id="${quantity}"
+							autocomplete="off" style="max-width: 60px; text-align: center;"
+							MIN="1" MAX="30" class="form-control" />
+						<button class="btn btn-success btn-sm" type="submit" name="submit"
+							value="Update" >Refresh</button>
+					</form>
+				</td>
+				<td>
+					
+							
+					<form id="deleteMusicBtn" method="post" th:action="@{/cart/deleteMusicFromCart}">
+						<input type="text" name="cartId" th:value="${cart.id}"
+							hidden="true" /> <input type="text" name="musicId"
+							th:value="${musicitem.music.id}" hidden="true" /> <input
+							type="text" name="buyerId" th:value="${cart.buyer.id}"
+							hidden="true" />
+					</form>
+					<button class="btn btn-danger btn-sm" type="submit" name="submit"
+							value="Delete" form="deleteMusicBtn">Delete</button>
+				</td>
+
+			</tr>
+												<td style="background-color: darkgreen; color: white">Total Price: [[${totalPrice}]]
+												</td>
+												<td style="background-color: darkgreen; color: white">Total number Of Items: [[${totalNumberOfItemsInCart}]]/[[${totalQuantity}]]
+												</td>
+		</tbody>
+	</table>
+
+</body>
+</html>
