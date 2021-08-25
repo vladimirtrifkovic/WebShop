@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.Role;
 import com.example.demo.repository.RoleRepository;
@@ -46,5 +49,13 @@ public class ApplicationController {
 		
 		return "registerAdmin";
 	}
-
+	
+	@PostMapping("/fail_login")
+	public RedirectView handleFailedLogin(RedirectAttributes redir) {
+		RedirectView  redirectView= new RedirectView("/login?error",true);
+		redir.addFlashAttribute("message2", "Invalid username or password");
+		System.out.println("A user has failed to login");
+		
+		return redirectView;
+	}
 }
