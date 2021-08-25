@@ -28,15 +28,6 @@ public class CartController {
 	private CartService cartService;
 	
 	@Autowired
-	private BookService bookService;
-	
-	@Autowired
-	private VideoService videoService;
-	
-	@Autowired
-	private MusicService musicService;
-	
-	@Autowired
 	private BuyerService buyerService;
 	
 	

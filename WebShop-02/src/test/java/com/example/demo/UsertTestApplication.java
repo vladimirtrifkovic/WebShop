@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.example.demo.model.Buyer;
@@ -32,9 +30,6 @@ class UsertTestApplication {
 		
 		@Autowired
 		private TestEntityManager entityManager;
-		
-//		@Autowired
-//		private BCryptPasswordEncoder encoder;
 		
 		@Test
 		public void listRoles() {

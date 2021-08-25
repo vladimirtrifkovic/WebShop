@@ -125,11 +125,8 @@ public class DetailsController {
 		}
 
 		cartService.saveCart(updatingCart);
-		
-		
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
-
 	}
 	
 	
@@ -153,13 +150,9 @@ public class DetailsController {
 					.filter(b -> b.getVideo().getId().equals(videoIDI)).findFirst().get();
 			currentVideo.setQuantity(quantitiIDI);
 		}
-
 		cartService.saveCart(updatingCart);
-		
-		
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
-
 	}
 	
 	@RequestMapping(value = "/cart/updateMusicQuantity", method = { RequestMethod.POST })
@@ -182,13 +175,9 @@ public class DetailsController {
 					.filter(b -> b.getMusic().getId().equals(musicIDI)).findFirst().get();
 			currentMusic.setQuantity(quantitiIDI);
 		}
-
 		cartService.saveCart(updatingCart);
-		
-		
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
-
 	}
 	
 	
@@ -281,6 +270,5 @@ public class DetailsController {
 			return "redirect:/carts";
 		}
 	}
-	
 	
 }

@@ -13,7 +13,6 @@ import com.example.demo.repository.BuyerRepository;
 @Service
 public class BuyerDetailsService implements UserDetailsService {
 	
-	
 
 	@Autowired
 	private BuyerRepository buyerRepository;

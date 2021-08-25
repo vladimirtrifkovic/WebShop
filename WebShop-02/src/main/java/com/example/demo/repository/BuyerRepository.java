@@ -9,8 +9,6 @@ import com.example.demo.model.Buyer;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Integer> {
-//	@Query("SELECT b FROM  Buyer b WHERE b.email = ?1")
-//	public Buyer findByEmail(String email);
 	
 	 @Query("SELECT b FROM  Buyer b WHERE b.email = :email")
 	public Buyer findByEmail(@Param("email") String email);

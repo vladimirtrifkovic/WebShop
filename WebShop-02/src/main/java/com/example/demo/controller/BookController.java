@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -61,8 +60,5 @@ public class BookController {
 		bookService.delete(id);
 		return "redirect/books";
 	}
-	
-	
-	
 
 }

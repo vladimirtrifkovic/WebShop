@@ -16,9 +16,6 @@ import com.example.demo.service.BuyerDetailsService;
 @EnableWebSecurity
 @Configuration
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-	
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -49,7 +46,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 					http
 					.csrf().disable()
 					.authorizeRequests()
-//					.antMatchers("/books/addNew", "/books/update", "/books/delete").hasAnyAuthority("ADMIN", "CREATOR") //added
 					.antMatchers(
 							"/login", 
 							"/resources/**", 
@@ -72,15 +68,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 					.usernameParameter("email")
 					.permitAll()
 					.and()
-					.logout().invalidateHttpSession(true)
+					.logout()
+					.deleteCookies("auth_code", "JSESSIONID").invalidateHttpSession(true)
 					.clearAuthentication(true)
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 					.logoutSuccessUrl("/login").permitAll();
 					
-				            
-					
-	
-				}
-	
-	
+	}
 }

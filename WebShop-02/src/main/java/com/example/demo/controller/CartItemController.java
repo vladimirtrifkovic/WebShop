@@ -1,4 +1,4 @@
-	package com.example.demo.controller;
+package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,10 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -28,12 +24,10 @@ import com.example.demo.link.CartVideoLinkId;
 import com.example.demo.model.Book;
 import com.example.demo.model.Buyer;
 import com.example.demo.model.Cart;
-import com.example.demo.model.CartItem;
 import com.example.demo.model.Music;
 import com.example.demo.model.Video;
 import com.example.demo.service.BookService;
 import com.example.demo.service.BuyerService;
-import com.example.demo.service.CartItemService;
 import com.example.demo.service.CartService;
 import com.example.demo.service.MusicService;
 import com.example.demo.service.VideoService;
@@ -41,8 +35,6 @@ import com.example.demo.service.VideoService;
 @Controller
 public class CartItemController {
 
-	@Autowired
-	private CartItemService cartItemService;
 	
 	@Autowired
 	private BuyerService buyerService;
@@ -83,7 +75,7 @@ public class CartItemController {
 		}
 		
 //		Provjeriti da li za taj cart postoji u cartBookLink (booksLink) book sa BookId
-//		ako postoji samo radimo setovanje prosledjenog quantitija
+//		ako postoji  radimo samo setovanje prosledjenog quantitija
 //		ako ne postoji dodajemo taj novi book i setujemo quantity
 //		
 		List<Integer> bookIds = currentCart.getBooksLink().stream().map(CartBookLink::getBook).map(Book::getId).collect(Collectors.toList());
@@ -103,33 +95,6 @@ public class CartItemController {
 		}
 		
 		cartService.saveCart(currentCart);
-		
-		
-//		List<Integer> bookIds = new ArrayList<>();
-//		for(CartBookLink bookLink : currentCart.getBooksLink()) {
-//			bookIds.add(bookLink.getBook().getId());
-//		}
-//
-//		if(bookIds.contains(bookId)) {
-//			CartBookLink currentBook = null;
-//			for(CartBookLink bookLink : currentCart.getBooksLink()) {}
-//				if ( bookLink.getBook().getId().equals(bookId) ) {
-//					currentBook = bookLink;
-//				}
-//			}	
-//			currentBook.setQuantity(currentBook.getQuantity() + 1);
-//		} else {
-//			
-//		}
-
-		
-//		radi se merge cart-a
-		
-//		CartItem cartItem = new CartItem();
-//		Book book = bookService.findById(id);
-//		cartItem.setBook(book);
-//		cartItem.setBuyer(buyer);
-//		cartItemService.addCartItem(cartItem);
 		
 		RedirectView  redirectView= new RedirectView("/books",true);
 	    redir.addFlashAttribute("messageAddBookToCart", "You successfully added book to cart");
@@ -226,45 +191,4 @@ public class CartItemController {
 //		return "redirect:/musics";
 	}
 	
-	//////////////////////////////////CART BOOK UPDATE QUANTITY //////////////////////////
-	
-	@RequestMapping(value = "/cartItemBooks/updateQuantity", method = { RequestMethod.POST})
-	public ModelAndView updateQuantity( @RequestParam("itemId") String itemId, @RequestParam("bookId") String bookId, 
-			@RequestParam("quantity") String quantity, @RequestParam("buyerId") String buyerId) {  
-			
-		
-		Integer bookIDI = Integer.parseInt(bookId);
-		Integer itemIDI = Integer.parseInt(itemId);
-		Integer quantitiIDI = Integer.parseInt(quantity);
-		Integer buyerIDI = Integer.parseInt(buyerId);
-		
-//		Provjeriti da li za usera postoji cart koji je submitted = false 
-//		Ako postoji uporediti sa cartId
-		
-//		Provjeriti da li za taj cart postoji u cartBookLink (booksLink) book sa BookId
-//		ako postoji samo radimo setovanje prosledjenog quantitija
-//		ako ne postoji dodajemo taj novi book i setujemo quantity
-//		
-//		radi se merge cart-a
-		
-		
-		
-		CartItem newCart = cartItemService.findById(itemIDI);
-		newCart.setQuantity(quantitiIDI);
-		cartItemService.addCartItem(newCart);
-	
-		ModelAndView mv = new ModelAndView("redirect:/cartItemBooks");
-		mv.addObject("newCart", newCart);
-		
-		return mv;
-	}
-	
-//	List<Integer> bookIds = currentCart.getBooksLink().stream().map(CartBookLink::getBook).map(Book::getId).collect(Collectors.toList());
-//	if(bookIds.contains(bookId)) {
-//		CartBookLink currentBook = currentCart.getBooksLink().stream().filter(b -> b.getBook().getId().equals(bookId)).findFirst().get(); 
-//		currentBook.setQuantity(quantity); //
-//	
-//	}
-//	
-//	cartService.saveCart(currentCart);
 }

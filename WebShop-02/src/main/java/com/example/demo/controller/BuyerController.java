@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +17,6 @@ public class BuyerController {
 	@Autowired
 	private BuyerService buyerService;
 	
-	@Autowired
-	private RoleRepository roleRepository;
-
 	
 	@GetMapping("/buyers")
 	public String getBuyers() {
@@ -29,7 +24,6 @@ public class BuyerController {
 		return "buyer";
 	}
 	
-	//Modified method to Add a new user User
 	@PostMapping(value="buyers/addNew")
 	public RedirectView addNew(Buyer buyer, RedirectAttributes redir) {
 		RedirectView  redirectView= new RedirectView("/login",true);
@@ -41,11 +35,6 @@ public class BuyerController {
 			buyerService.addBuyer(buyer);
 			redir.addFlashAttribute("message", "You successfully registered! You can now login");
 		}
-		
-		
-		
-//		buyerService.addBuyer(buyer);
-//	    redir.addFlashAttribute("message", "You successfully registered! You can now login");
 	    
 	    return redirectView;				
 	}	

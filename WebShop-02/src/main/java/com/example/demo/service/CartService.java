@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +26,6 @@ public class CartService {
 		cartRepository.deleteByIdAndBuyer(id, buyer);
 	}
 	
-	
-	
 	public List<Cart> findAllCartsByBuyer(Buyer buyer) {
 		if (buyer == null) {
 			return null;
@@ -48,8 +45,6 @@ public class CartService {
 	public Cart getOpenCart(Buyer buyer) {
 		return  cartRepository.findByBuyerAndSubmitted(buyer, false);
 	}
-	
-	
 	
 	public List<Cart> getCloseCarts(Buyer buyer) {
 		return cartRepository.findAllByBuyerAndSubmitted(buyer, true);
