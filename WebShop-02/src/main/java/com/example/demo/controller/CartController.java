@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.model.Buyer;
 import com.example.demo.model.Cart;
-import com.example.demo.service.BookService;
 import com.example.demo.service.BuyerService;
 import com.example.demo.service.CartService;
-import com.example.demo.service.MusicService;
-import com.example.demo.service.VideoService;
 
 @Controller
 public class CartController {

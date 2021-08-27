@@ -45,8 +45,9 @@ public class DetailsController {
 		return "detalji";
 	}
 
+	
+	
 	@RequestMapping(value = "/cartBookDetails/find", method = { RequestMethod.GET })
-//	@ResponseBody
 	public ModelAndView showTableOfItems(@RequestParam("id") String itemId,
 			@AuthenticationPrincipal Authentication authentication) {
 
@@ -103,6 +104,7 @@ public class DetailsController {
 		return mv;
 	}
 
+	/////////////////////////////// BOOK QUANTITY UPDATE//////////////////////////////
 	@RequestMapping(value = "/cart/updateQuantity", method = { RequestMethod.POST })
 	public String updateBookQuantity(@RequestParam("cartId") String cartId, @RequestParam("bookId") String bookId,
 			@RequestParam("quantity") String quantity, @RequestParam("buyerId") String buyerId) {
@@ -124,12 +126,14 @@ public class DetailsController {
 			currentBook.setQuantity(quantitiIDI);
 		}
 
-		cartService.saveCart(updatingCart);
+		if(updatingCart.isSubmitted() == false) {
+			cartService.saveCart(updatingCart);
+			}
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
 	}
 	
-	
+/////////////////////////////// VIDEO QUANTITY UPDATE //////////////////////////////
 	@RequestMapping(value = "/cart/updateVideoQuantity", method = { RequestMethod.POST })
 	public String updateVideoQuantity(@RequestParam("cartId") String cartId, @RequestParam("videoId") String videoId,
 			@RequestParam("quantity") String quantity, @RequestParam("buyerId") String buyerId) {
@@ -150,11 +154,14 @@ public class DetailsController {
 					.filter(b -> b.getVideo().getId().equals(videoIDI)).findFirst().get();
 			currentVideo.setQuantity(quantitiIDI);
 		}
-		cartService.saveCart(updatingCart);
+		if(updatingCart.isSubmitted() == false) {
+			cartService.saveCart(updatingCart);
+			}
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
 	}
 	
+/////////////////////////////// MUSIC QUANTITY UPDATE //////////////////////////////
 	@RequestMapping(value = "/cart/updateMusicQuantity", method = { RequestMethod.POST })
 	public String updateMusicQuantity(@RequestParam("cartId") String cartId, @RequestParam("musicId") String musicId,
 			@RequestParam("quantity") String quantity, @RequestParam("buyerId") String buyerId) {
@@ -175,12 +182,14 @@ public class DetailsController {
 					.filter(b -> b.getMusic().getId().equals(musicIDI)).findFirst().get();
 			currentMusic.setQuantity(quantitiIDI);
 		}
+		if(updatingCart.isSubmitted() == false) {
 		cartService.saveCart(updatingCart);
+		}
 
 		return "redirect:/cartBookDetails/find/?id=" + updatingCart.getId();
 	}
 	
-	
+/////////////////////////////// BOOK DELETE FROM CART //////////////////////////////
 	@RequestMapping(value = "/cart/deleteBookFromCart", method = { RequestMethod.POST })
 	public String deleteBookFromCart(@RequestParam("cartId") String cartId, @RequestParam("bookId") String bookId,
 			 @RequestParam("buyerId") String buyerId) {
@@ -210,7 +219,7 @@ public class DetailsController {
 			return "redirect:/carts";
 		}
 	}
-	
+/////////////////////////////// VIDEO DELETE FROM CART //////////////////////////////
 	@RequestMapping(value = "/cart/deleteVideoFromCart", method = { RequestMethod.POST })
 	public String deleteVideoFromCart(@RequestParam("cartId") String cartId, @RequestParam("videoId") String videoId,
 			 @RequestParam("buyerId") String buyerId) {
@@ -241,6 +250,7 @@ public class DetailsController {
 		}
 	}
 	
+/////////////////////////////// MUSIC DELETE FROM CART //////////////////////////////
 	@RequestMapping(value = "/cart/deleteMusicFromCart", method = { RequestMethod.POST })
 	public String deleteMusicFromCart(@RequestParam("cartId") String cartId, @RequestParam("musicId") String musicId,
 			 @RequestParam("buyerId") String buyerId) {

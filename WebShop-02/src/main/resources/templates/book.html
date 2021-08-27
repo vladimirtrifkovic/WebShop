@@ -163,7 +163,7 @@
 							<th>Price</th>
 							<th>Page Numbers</th>
 							<th>Publish Date</th>
-							<th>PublishingHouse</th>
+							<th>Publishing House</th>
 							<th>Authors</th>
 							<th>Actions</th>
 						</tr>
@@ -186,10 +186,6 @@
 										class="icon_pencil-edit"></i></a>
 								</div>
 								
-<!-- 								<div class="btn-group"> -->
-<!-- 									<a class="btn btn-success" id="detailsButton"><i -->
-<!-- 										class="icon_document_alt"></i></a> -->
-<!-- 								</div> -->
 								<div  sec:authorize="hasAuthority('ADMIN')" class="btn-group">
 									<a th:href="@{/books/delete/(id=${book.id})}"
 										class="btn btn-danger" id="deleteButton"><i
@@ -338,14 +334,14 @@
 
 						<div class="form-group">
 							<label for="recipient-name" class="col-form-label">Price:</label>
-							<input type="number" class="form-control" id="priceEdit"
+							<input type="number" class="form-control" MIN="10" id="priceEdit"
 								name="price">
 						</div>
 
 						<div class="form-group">
 							<label for="recipient-name" class="col-form-label">Page
 								Numbers:</label> <input type="number" class="form-control"
-								id="pageNumbersEdit" name="pageNumbers">
+								id="pageNumbersEdit" MIN="10" name="pageNumbers">
 						</div>
 
 						<div class="form-group">
