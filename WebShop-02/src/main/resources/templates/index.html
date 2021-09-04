@@ -69,11 +69,13 @@
 				<!--  search form start -->
 				<ul class="nav top-menu">
 					<li>
-						<a href="/login"><i class="icon_key_alt"></i>
-									Log Out</a>
+						<a href="/login"><i class="icon_key_alt"></i>Log Out</a>
 					</li>
 					<li>
-					<a sec:authorize="hasAuthority('ADMIN')"  th:href="@{/register1}" class="btn btn-info btn-lg btn-block">Register New User</a>
+						<a sec:authorize="hasAuthority('ADMIN')"  th:href="@{/register1}" class="btn btn-info btn-lg btn-block">Register New User</a>
+					</li>
+					<li>
+						<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/buyersAdmin}" class="btn btn-info btn-lg btn-block">Enable/Disable User</a>
 					</li>
 				</ul>
 				<!--  Logout  end -->

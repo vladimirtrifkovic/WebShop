@@ -38,5 +38,9 @@ public class BuyerService {
 	public Buyer findBuyerByEmail(String email) {
 		return buyerRepository.findByEmail(email);
 	}
+	
+	public void saveBuyer(Buyer buyer) {
+		buyerRepository.save(buyer);
+	}
 
 }

@@ -61,6 +61,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 							"/img/**",
 							"/js/**").permitAll()
 					.antMatchers("/buyers/addNew").permitAll()
+					.and().authorizeRequests().antMatchers("/buyersAdmin/**").hasAnyAuthority("ADMIN")
 					.anyRequest().authenticated()
 					.and()
 					.formLogin()

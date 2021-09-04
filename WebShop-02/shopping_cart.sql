@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2021 at 10:56 PM
+-- Generation Time: Sep 02, 2021 at 10:59 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -37,7 +37,7 @@ CREATE TABLE `actor` (
 --
 
 INSERT INTO `actor` (`id`, `name`) VALUES
-(4, 'Actor11'),
+(4, 'Actor1'),
 (5, 'Actor2'),
 (6, 'Actor3'),
 (8, 'Actor4');
@@ -58,12 +58,12 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `name`) VALUES
-(1, 'Ivo Andric1'),
-(2, 'Dobrica Cosic'),
-(3, 'Bojan Ljubenović'),
-(9, 'Author Music 1'),
-(10, 'Author Music2'),
-(11, 'Author Music3');
+(1, ' Book  Author1'),
+(2, ' Book Author2'),
+(3, 'Book Author3'),
+(9, ' Music  Author1'),
+(10, 'Music Author2'),
+(11, 'Music Author3');
 
 -- --------------------------------------------------------
 
@@ -86,10 +86,10 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `description`, `price`, `publish_date`, `title`, `page_numbers`, `publishing_house`) VALUES
-(1, 'Opis Knjige2', 200, '2021-08-19 00:00:00', 'Knjiga5', 500, 'Lagunaa'),
-(2, 'Opis Knjige', 20, '2021-07-07 00:00:00', 'Knjiga1', 333, 'Laguna'),
-(3, 'Opis Knjige3', 25, '2021-08-18 00:00:00', 'Knjiga3', 600, 'eden1'),
-(4, 'Komedija', 575, '2021-08-05 00:00:00', 'Book5', 400, 'Laguna'),
+(1, 'Book description5', 200, '2020-01-15 00:00:00', 'Book5', 489, 'Laguna'),
+(2, 'Book description1', 777, '2017-02-26 00:00:00', 'Book1', 400, 'Vulkan'),
+(3, 'Book descritpion3', 255, '2019-07-25 00:00:00', 'Book3', 654, 'Prometej'),
+(4, 'Book description4', 575, '2021-08-04 00:00:00', 'Book4', 753, 'Logos'),
 (6, 'Descritpion 6', 850, '2021-08-19 00:00:00', 'Book6', 400, 'Delfi'),
 (7, 'Description 7', 789, '2021-08-19 00:00:00', 'Book7', 569, 'Laguna');
 
@@ -109,13 +109,16 @@ CREATE TABLE `book_author_link` (
 --
 
 INSERT INTO `book_author_link` (`author_id`, `book_id`) VALUES
-(1, 2),
-(1, 3),
+(1, 1),
 (1, 6),
 (2, 1),
 (2, 2),
+(2, 3),
+(2, 4),
 (2, 7),
-(3, 4);
+(3, 2),
+(3, 3),
+(9, 2);
 
 -- --------------------------------------------------------
 
@@ -141,8 +144,9 @@ CREATE TABLE `buyer` (
 INSERT INTO `buyer` (`id`, `address`, `email`, `enabled`, `first_name`, `last_name`, `password`, `phone`) VALUES
 (43, 'User2 bb', 'user@user.com', b'1', 'User2', 'User2FName', '$2a$10$TGrHqBdCNaRisVNN7HtB/ebpU9jT/avZ1j0Mt66m8ptbe8tOdY/Ti', '53453453'),
 (46, 'User2 bb', 'user2@user2.com', b'1', 'User2', 'User2FName', '$2a$10$ibjx.hyZRkgtdVWelp4ln.fYQK5HpyFixUsoOMaiKioKMNIaPdLeu', '986532'),
-(47, 'Admin  bb', 'admin@admin.com', b'1', 'Admin', 'AdminLName', '$2a$10$ibjx.hyZRkgtdVWelp4ln.fYQK5HpyFixUsoOMaiKioKMNIaPdLeu', '9854712'),
-(64, 'User2 bb', 'user1@user1.com', b'1', 'User2', 'User2 LName', '$2a$10$7reKtaOobaKm6f8r6EFQ2O9af2QG7pAOGmKb751yfT4VWXUf.gwZi', '789654');
+(64, 'User2 bb', 'user1@user1.com', b'1', 'User2', 'User2 LName', '$2a$10$7reKtaOobaKm6f8r6EFQ2O9af2QG7pAOGmKb751yfT4VWXUf.gwZi', '789654'),
+(65, 'Address bb', 'pera@pera.com', b'1', 'Pera', 'Peric', '$2a$10$Cn7q7WEx6GMz8Bp3vIuotOTj1JaC.jZ64hR0HazaHTZky4ju.v9zi', '789456'),
+(66, 'Admin bb', 'admin@admin.com', b'1', 'Admin', 'AdminLname', '$2a$10$M/gMe7ZGLF0RaYL4TWBHd.6cySjYYEc8MtttKYHWCowY0rYKZonda', '789321');
 
 -- --------------------------------------------------------
 
@@ -162,8 +166,10 @@ CREATE TABLE `buyer_roles` (
 INSERT INTO `buyer_roles` (`buyer_id`, `role_id`) VALUES
 (43, 3),
 (46, 3),
-(47, 2),
-(64, 3);
+(64, 3),
+(65, 3),
+(66, 2),
+(66, 3);
 
 -- --------------------------------------------------------
 
@@ -185,7 +191,14 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`id`, `created_date`, `submitted`, `buyer_id`, `submitted_date`) VALUES
 (9, '2021-08-23 20:54:33', b'1', 47, '2021-08-23 20:56:39'),
-(10, '2021-08-24 21:57:26', b'0', 47, NULL);
+(10, '2021-08-24 21:57:26', b'0', 47, NULL),
+(11, '2021-08-25 00:59:35', b'1', 65, '2021-08-26 23:24:01'),
+(12, '2021-08-26 23:13:36', b'1', 43, '2021-08-26 23:15:44'),
+(13, '2021-08-26 23:16:39', b'1', 43, '2021-08-26 23:18:40'),
+(14, '2021-08-26 23:19:27', b'0', 43, NULL),
+(15, '2021-08-26 23:24:14', b'0', 65, NULL),
+(16, '2021-09-02 22:22:01', b'1', 66, '2021-09-02 22:22:34'),
+(17, '2021-09-02 22:22:59', b'0', 66, NULL);
 
 -- --------------------------------------------------------
 
@@ -205,10 +218,34 @@ CREATE TABLE `cart_book_link` (
 
 INSERT INTO `cart_book_link` (`book_id`, `cart_id`, `quantity`) VALUES
 (1, 9, 5),
-(2, 9, 1),
+(1, 11, 2),
+(1, 12, 1),
+(1, 13, 1),
+(1, 16, 1),
+(1, 17, 1),
+(2, 9, 3),
+(2, 10, 2),
+(2, 11, 8),
+(2, 16, 2),
+(2, 17, 2),
 (3, 9, 1),
+(3, 10, 5),
+(3, 12, 3),
+(3, 13, 2),
+(3, 14, 1),
+(3, 15, 3),
 (4, 9, 1),
-(7, 9, 7);
+(4, 11, 3),
+(4, 13, 2),
+(4, 14, 4),
+(4, 15, 4),
+(6, 12, 1),
+(6, 15, 1),
+(7, 9, 7),
+(7, 11, 4),
+(7, 13, 1),
+(7, 14, 1),
+(7, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -242,7 +279,25 @@ CREATE TABLE `cart_music_link` (
 
 INSERT INTO `cart_music_link` (`cart_id`, `music_id`, `quantity`) VALUES
 (9, 1, 1),
-(9, 4, 6);
+(9, 4, 6),
+(10, 2, 1),
+(10, 3, 6),
+(11, 1, 4),
+(12, 1, 1),
+(12, 3, 3),
+(12, 4, 2),
+(13, 1, 1),
+(13, 3, 5),
+(13, 4, 2),
+(14, 1, 2),
+(14, 2, 3),
+(14, 4, 2),
+(15, 2, 1),
+(15, 3, 6),
+(15, 4, 1),
+(16, 1, 2),
+(17, 3, 1),
+(17, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +318,26 @@ CREATE TABLE `cart_video_link` (
 INSERT INTO `cart_video_link` (`cart_id`, `video_id`, `quantity`) VALUES
 (9, 3, 1),
 (9, 4, 5),
-(10, 3, 1);
+(10, 3, 4),
+(10, 4, 4),
+(10, 6, 2),
+(11, 1, 2),
+(11, 3, 4),
+(12, 1, 2),
+(12, 3, 3),
+(12, 6, 4),
+(13, 3, 2),
+(13, 4, 4),
+(13, 6, 1),
+(14, 3, 1),
+(14, 4, 2),
+(14, 6, 1),
+(15, 3, 5),
+(15, 4, 5),
+(15, 6, 1),
+(16, 3, 2),
+(17, 3, 1),
+(17, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +365,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(65);
+(67);
 
 -- --------------------------------------------------------
 
@@ -342,7 +416,6 @@ INSERT INTO `music_author_link` (`author_id`, `music_id`) VALUES
 (10, 2),
 (10, 3),
 (10, 4),
-(11, 1),
 (11, 2),
 (11, 3),
 (11, 4);
@@ -419,7 +492,8 @@ INSERT INTO `video_actor_link` (`actor_id`, `video_id`) VALUES
 (6, 1),
 (6, 3),
 (6, 4),
-(6, 6);
+(6, 6),
+(8, 1);
 
 --
 -- Indexes for dumped tables
@@ -552,13 +626,13 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `music`
